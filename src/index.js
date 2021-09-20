@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import LifeAdmin from './components/LifeAdmin.js';
+import { BrowserRouter as Router } from "react-router-dom"
+import "./index.css"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <LifeAdmin />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
