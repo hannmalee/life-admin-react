@@ -4,6 +4,7 @@ export const CategoryContext = React.createContext()
 
 export const CategoryProvider = (props) => {
     const [ categories, setCategories ] = useState([])
+    const [ category, setCategory ] = useState({})
 
     const getCategories = () => {
         return fetch("http://localhost:8000/categories", {
@@ -21,6 +22,7 @@ export const CategoryProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("life-admin-token")}`
             }
         }).then(res => res.json())
+        .then(setCategory)
     }
 
     const createCategory = (category) => {
@@ -50,7 +52,7 @@ export const CategoryProvider = (props) => {
     
 
     return (
-        <CategoryContext.Provider value={{ categories, getCategories, createCategory, getCategory, updateCategory }} >
+        <CategoryContext.Provider value={{ category, categories, getCategories, createCategory, getCategory, updateCategory, setCategory }} >
             { props.children }
         </CategoryContext.Provider>
     )

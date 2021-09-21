@@ -13,19 +13,22 @@ export const CategoryList = (props) => {
 
     return (
         <article className="categories">
-            <button className="btn btn-2 btn-sep icon-create"
+            {
+                categories.map(category => {
+                    return <button key={`category--${category.id}`} className="category"
+                    onClick={() => {
+                        history.push({ pathname: `/categories/${category.id}`})
+                    }}>
+                        <div className="category__title">{category.title}</div>
+                        {/* <div className="category__description">{category.description} </div> */}
+                    </button>
+                })
+            }
+        <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
                     history.push({ pathname: "/categories/new" })
                 }}
             >add new category</button>
-            {
-                categories.map(category => {
-                    return <section key={`category--${category.id}`} className="category">
-                        <div className="category__title">{category.title}</div>
-                        {/* <div className="category__description">{category.description} </div> */}
-                    </section>
-                })
-            }
         </article>
     )
 }

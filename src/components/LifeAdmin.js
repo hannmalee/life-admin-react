@@ -11,7 +11,7 @@ export const LifeAdmin = () => (
     <Route>
       {localStorage.getItem("life-admin-token") ? (
         <>
-          {/* <NavBar /> */}
+          <NavBar />
           <ApplicationViews />
         </>
       ) : (
