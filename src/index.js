@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { LifeAdmin } from './components/LifeAdmin';
 import { BrowserRouter as Router } from "react-router-dom"
-import "./index.css"
 
 ReactDOM.render(
   <React.StrictMode>

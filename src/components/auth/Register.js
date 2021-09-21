@@ -1,15 +1,18 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
     const firstName = React.createRef()
     const lastName = React.createRef()
     const email = React.createRef()
-    const bio = React.createRef()
+    const household_name = React.createRef()
+    const description = React.createRef()
     const password = React.createRef()
     const verifyPassword = React.createRef()
     const passwordDialog = React.createRef()
+
+    const history = useHistory()
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -19,7 +22,8 @@ export const Register = (props) => {
                 "username": email.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
-                "bio": bio.current.value,
+                "household_name": household_name.current.value,
+                "description": description.current.value,
                 "email": email.current.value,
                 "password": password.current.value
             }
@@ -36,7 +40,7 @@ export const Register = (props) => {
                 .then(res => {
                     if ("token" in res) {
                         localStorage.setItem("life-admin-token", res.token)
-                        props.history.push("/")
+                        history.push("/")
                     }
                 })
         } else {
@@ -75,8 +79,12 @@ export const Register = (props) => {
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                    <label htmlFor="householdName"> Enter your team or household name: </label>
+                    <textarea ref={household_name} name="household_name" className="form-control" placeholder="The Smith Family" />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="householdDescription"> Tell us about your team: </label>
+                    <textarea ref={description} name="description" className="form-control" placeholder="Roomies!" />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
