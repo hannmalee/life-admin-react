@@ -8,6 +8,7 @@ import { CategoryForm } from "./category/CategoryForm";
 import { TaskForm } from "./task/TaskForm";
 import { HouseholdUserProvider } from "./auth/HouseholdUserProvider";
 import { HouseholdUser } from "./auth/HouseholdUser";
+import { CategoryDetail } from "./category/CategoryDetail";
 
 export const ApplicationViews = () => {
   return (
@@ -28,6 +29,9 @@ export const ApplicationViews = () => {
           <Route exact path="/categories/:categoryId(\d+)/update">
             <CategoryForm />
           </Route>
+            <Route exact path="/categories/:categoryId">
+            <CategoryDetail />
+            </Route>
           <TaskProvider>
             <Route exact path="/tasks">
               <TaskList />
