@@ -13,19 +13,19 @@ export const TaskList = (props) => {
 
     return (
         <article className="tasks">
+            {
+                tasks.map(task => {
+                    return <section key={`task--${task.id}`} className="task">
+                        <button className="task__title">{task.title}</button>
+                        {/* <button className="category__description">{category.description} </div> */}
+                    </section>
+                })
+            }
             <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
                     history.push({ pathname: "/tasks/new" })
                 }}
             >add new task</button>
-            {
-                tasks.map(task => {
-                    return <section key={`task--${task.id}`} className="task">
-                        <div className="task__title">{task.name}</div>
-                        {/* <div className="category__description">{category.description} </div> */}
-                    </section>
-                })
-            }
         </article>
     )
 }

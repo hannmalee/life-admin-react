@@ -17,10 +17,7 @@ export const NavBar = (props) => {
                 Life Admin
             </button>
             <li className="navbar__item">
-                Navigation link
-            </li>
-            <li className="navbar__item">
-                Navigation link
+                Search
             </li>
             {
                 (localStorage.getItem("life-admin-token") !== null) ?

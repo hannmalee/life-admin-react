@@ -4,6 +4,7 @@ export const TaskContext = React.createContext()
 
 export const TaskProvider = (props) => {
     const [ tasks, setTasks ] = useState([])
+    const [ task, setTask ] = useState({})
 
     const getTasks = () => {
         return fetch("http://localhost:8000/tasks", {
@@ -21,6 +22,7 @@ export const TaskProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("life-admin-token")}`
             }
         }).then(res => res.json())
+        .then(setTask)
     }
 
     const createTask = (task) => {

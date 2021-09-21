@@ -20,6 +20,7 @@ export const ApplicationViews = () => {
         }}
       >
         <CategoryProvider>
+          <TaskProvider>
           <Route exact path="/">
             <CategoryList />
           </Route>
@@ -32,7 +33,6 @@ export const ApplicationViews = () => {
             <Route exact path="/categories/:categoryId">
             <CategoryDetail />
             </Route>
-          <TaskProvider>
             <Route exact path="/tasks">
               <TaskList />
             </Route>
