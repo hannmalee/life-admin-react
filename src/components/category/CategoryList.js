@@ -21,7 +21,7 @@ export const CategoryList = (props) => {
             {
                 categories.map(category => {
                     return <section key={`category--${category.id}`} className="category">
-                        <div className="category__title">{category.name}</div>
+                        <div className="category__title">{category.title}</div>
                         {/* <div className="category__description">{category.description} </div> */}
                     </section>
                 })
