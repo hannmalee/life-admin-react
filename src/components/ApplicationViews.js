@@ -6,8 +6,8 @@ import { TaskProvider } from './task/TaskProvider'
 import { TaskList } from "./task/TaskList"
 import { CategoryForm } from "./category/CategoryForm.js"
 import { TaskForm } from "./task/TaskForm.js"
-import { ProfileProvider } from "./auth/ProfileProvider.js"
-import { Profile } from "./auth/Profile.js"
+import { HouseholdUserProvider } from "./auth/HouseholdUserProvider"
+import { HouseholdUser } from "./auth/HouseholdUser"
 
 
 export const ApplicationViews = () => {
@@ -35,11 +35,11 @@ export const ApplicationViews = () => {
                     </Route>
                 </TaskProvider>
             </CategoryProvider>
-            <ProfileProvider>
-                <Route exact path="/profile">
-                    <Profile />
+            <HouseholdUserProvider>
+                <Route exact path="/household_user">
+                    <HouseholdUser />
                 </Route>
-            </ProfileProvider>
+            </HouseholdUserProvider>
         </main>
     </>
 }
