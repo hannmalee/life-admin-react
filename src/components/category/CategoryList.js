@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react"
 import { CategoryContext, } from "./CategoryProvider"
 import { useHistory } from "react-router-dom/cjs/react-router-dom"
 
-
 export const CategoryList = (props) => {
     const { categories, getCategories } = useContext(CategoryContext)
     const history = useHistory()
@@ -12,6 +11,7 @@ export const CategoryList = (props) => {
     }, [])
 
     return (
+        
         <article className="categories">
             {
                 categories.map(category => {
@@ -29,6 +29,11 @@ export const CategoryList = (props) => {
                     history.push({ pathname: "/categories/new" })
                 }}
             >add new category</button>
+        <button className="btn btn-2 btn-sep icon-create"
+                onClick={() => {
+                    history.push({ pathname: "/search" })
+                }}
+            >add someone to household</button>
         </article>
     )
 }

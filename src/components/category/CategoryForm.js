@@ -8,7 +8,6 @@ export const CategoryForm = () => {
     const history = useHistory()
     const { createCategory, getCategory, updateCategory, getCategories } = useContext(CategoryContext)
     const { categoryId } = useParams()
-    const [category, setCategory] = useState({})
     const [isEdit, setIsEdit] = useState(false)
     /*
         Since the input fields are bound to the values of

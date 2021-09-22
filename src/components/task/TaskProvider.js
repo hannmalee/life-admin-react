@@ -4,7 +4,7 @@ export const TaskContext = React.createContext()
 
 export const TaskProvider = (props) => {
     const [ tasks, setTasks ] = useState([])
-    const [ task, setTask ] = useState({})
+    const [ , setTask ] = useState({})
 
     const getTasks = () => {
         return fetch("http://localhost:8000/tasks", {

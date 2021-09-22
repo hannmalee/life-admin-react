@@ -21,17 +21,17 @@ export const ApplicationViews = () => {
       >
         <CategoryProvider>
           <TaskProvider>
-          <Route exact path="/">
-            <CategoryList />
-          </Route>
-          <Route exact path="/categories/new">
-            <CategoryForm />
-          </Route>
-          <Route exact path="/categories/:categoryId(\d+)/update">
-            <CategoryForm />
-          </Route>
+            <Route exact path="/">
+              <CategoryList />
+            </Route>
+            <Route exact path="/categories/new">
+              <CategoryForm />
+            </Route>
+            <Route exact path="/categories/:categoryId(\d+)/update">
+              <CategoryForm />
+            </Route>
             <Route exact path="/categories/:categoryId">
-            <CategoryDetail />
+              <CategoryDetail />
             </Route>
             <Route exact path="/tasks">
               <TaskList />

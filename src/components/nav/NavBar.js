@@ -8,6 +8,8 @@ export const NavBar = (props) => {
     const history = useHistory()
 
     return (
+        <>
+        <div className="householdName"> Household Name </div>
         <ul className="navbar">
             <button 
             onClick={() => {
@@ -38,5 +40,6 @@ export const NavBar = (props) => {
                         </li>
                     </>
             }        </ul>
+            </>
     )
 }
