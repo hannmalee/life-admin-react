@@ -4,6 +4,7 @@ export const TaskContext = React.createContext()
 
 export const TaskProvider = (props) => {
     const [ tasks, setTasks ] = useState([])
+    const [ , setTask ] = useState({})
 
     const getTasks = () => {
         return fetch("http://localhost:8000/tasks", {
@@ -21,6 +22,7 @@ export const TaskProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("life-admin-token")}`
             }
         }).then(res => res.json())
+        .then(setTask)
     }
 
     const createTask = (task) => {
@@ -46,11 +48,19 @@ export const TaskProvider = (props) => {
         })
             .then(getTasks)
     }
-    
-    
 
+    const deleteTask = taskId => {
+        return fetch(`http://localhost:8000/tasks/${ taskId }`, {
+            method: "DELETE",
+            headers:{
+                "Authorization": `Token ${localStorage.getItem("life-admin-token")}`
+            }
+        })
+            .then(getTasks)
+    }
+    
     return (
-        <TaskContext.Provider value={{ tasks, getTasks, createTask, getTask, updateTask }} >
+        <TaskContext.Provider value={{ tasks, getTasks, createTask, getTask, updateTask, deleteTask }} >
             { props.children }
         </TaskContext.Provider>
     )
