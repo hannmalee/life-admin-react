@@ -8,6 +8,8 @@ export const TaskForm = () => {
   const { createTask, getTask, updateTask, getTasks } = useContext(TaskContext);
   const { taskId } = useParams();
   const [isEdit, setIsEdit] = useState(false);
+  const { categoryId } = useParams()
+
   /*
         Since the input fields are bound to the values of
         the properties of this state variable, you need to
@@ -17,8 +19,8 @@ export const TaskForm = () => {
     title: "",
     description: "",
     is_completed: false,
-    created_on: "",
-    due_date: "",
+    created_on: "2021-10-2",
+    due_date: "2021-10-2",
     category: 0,
     assigned_to: 0,
     created_by: 0,
@@ -42,10 +44,10 @@ export const TaskForm = () => {
           setCurrentTask({
             title: data.title,
             description: data.description,
-            is_completed: Date.now,
+            is_completed: false,
             created_on: data.created_on,
             due_date: data.due_date,
-            category: data.category,
+            category: categoryId,
             assigned_to: data.assigned_to,
             created_by: parseInt(localStorage.getItem("life-admin-token")),
           });
@@ -79,6 +81,12 @@ export const TaskForm = () => {
       const changeTaskDueDateState = (event) => {
         const newTaskState = { ...currentTask };
         newTaskState.due_date = event.target.value;
+        setCurrentTask(newTaskState);
+      };
+
+      const changeTaskCategoryState = (event) => {
+        const newTaskState = { ...currentTask };
+        newTaskState.category = event.target.value;
         setCurrentTask(newTaskState);
       };
 
@@ -123,7 +131,7 @@ export const TaskForm = () => {
                 />
               </div>
             </fieldset>
-            <fieldset>
+            {/* <fieldset>
               <div className="form-group">
                 <label htmlFor="due_date">Due Date: </label>
                 <input
@@ -134,6 +142,22 @@ export const TaskForm = () => {
                   className="form-control"
                   value={currentTask.due_date}
                   onChange={changeTaskDueDateState}
+                />
+              </div>
+            </fieldset> */}
+            <fieldset>
+              <div className="form-group">
+                <label htmlFor="assigned_to">
+                  Category: *drop down menu*:{" "}
+                </label>
+                <input
+                  type="text"
+                  name="category"
+                  required
+                  autoFocus
+                  className="form-control"
+                  value={currentTask.category}
+                  onChange={changeTaskCategoryState}
                 />
               </div>
             </fieldset>
@@ -163,10 +187,10 @@ export const TaskForm = () => {
                 evt.preventDefault();
 
                 const task = {
-                  title: setCurrentTask.title,
-                  description: setCurrentTask.description,
+                  title: currentTask.title,
+                  description: currentTask.description,
                   is_completed: currentTask.is_completed,
-                  created_on: Date.now,
+                  created_on: currentTask.created_on,
                   due_date: currentTask.due_date,
                   category: currentTask.category,
                   assigned_to: currentTask.assigned_to,
