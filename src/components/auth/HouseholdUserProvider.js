@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-export const ProfileContext = React.createContext()
+export const HouseholdUserContext = React.createContext()
 
 export const HouseholdUserProvider = (props) => {
     /*
@@ -8,10 +8,11 @@ export const HouseholdUserProvider = (props) => {
         so that React doesn't throw an error when you try to
         iterate the events array in the view.
     */
-    const [householdUser, setHouseholdUser] = useState()
+    const [householdUser, setHouseholdUser] = useState({})
+    const [householdUsers, setHouseholdUsers] = useState([])
 
-    const getHouseholdUser = () => {
-        return fetch("http://localhost:8000/household_user", {
+    const getHouseholdUserProfile = () => {
+        return fetch("http://localhost:8000/household_users", {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("life_admin_token")}`
             }
@@ -20,9 +21,19 @@ export const HouseholdUserProvider = (props) => {
             .then(setHouseholdUser)
     }
 
+    const getHouseholdUsers = () => {
+        return fetch("http://localhost:8000/household_users", {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("life_admin_token")}`
+            }
+        })
+            .then(response => response.json())
+            .then(setHouseholdUsers)
+    }
+
     return (
-        <ProfileContext.Provider value={{ householdUser, getHouseholdUser }}>
+        <HouseholdUserContext.Provider value={{ householdUser, getHouseholdUserProfile, householdUsers, getHouseholdUsers }}>
             {props.children}
-        </ProfileContext.Provider>
+        </HouseholdUserContext.Provider>
     )
 }

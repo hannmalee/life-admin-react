@@ -7,8 +7,9 @@ import { TaskList } from "./task/TaskList";
 import { CategoryForm } from "./category/CategoryForm";
 import { TaskForm } from "./task/TaskForm";
 import { HouseholdUserProvider } from "./auth/HouseholdUserProvider";
-import { HouseholdUser } from "./auth/HouseholdUser";
+import { HouseholdUserProfile } from "./auth/HouseholdUser";
 import { CategoryDetail } from "./category/CategoryDetail";
+import { UserSearch } from "./auth/UserSearch";
 
 export const ApplicationViews = () => {
   return (
@@ -42,8 +43,11 @@ export const ApplicationViews = () => {
           </TaskProvider>
         </CategoryProvider>
         <HouseholdUserProvider>
-          <Route exact path="/household_user">
-            <HouseholdUser />
+          <Route exact path="/profile">
+            <HouseholdUserProfile />
+          </Route>
+          <Route exact path="/search">
+            <UserSearch />
           </Route>
         </HouseholdUserProvider>
       </main>
