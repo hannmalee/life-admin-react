@@ -8,16 +8,20 @@ import { Redirect } from "react-router";
 
 export const LifeAdmin = () => (
   <>
-    <Route>
-      {localStorage.getItem("life-admin-token") ? (
-        <>
-          <NavBar />
-          <ApplicationViews />
-        </>
-      ) : (
-        <Redirect to="/login" />
-      )}
-    </Route>
+    <Route render={() => {
+            if (localStorage.getItem("life-admin-token")) {
+                return <>
+                    <Route> 
+                      <NavBar /> 
+                    </Route>
+                    <Route>
+                    <ApplicationViews />
+                      </Route>  
+                </>
+            } else {
+                return <Redirect to="/login" />
+            }
+        }} />
     <Route path="/login">
       <Login />
     </Route>

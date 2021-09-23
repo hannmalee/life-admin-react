@@ -14,8 +14,6 @@ export const UserSearch = () => {
 
   const [foundUserObj, setFoundUserObj] = useState()
 
-  const myHousehold = 
-
 
   useEffect(() => {
     getHouseholdUsers()

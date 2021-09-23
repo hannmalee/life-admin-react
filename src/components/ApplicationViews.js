@@ -19,7 +19,8 @@ export const ApplicationViews = () => {
           margin: "5rem 2rem",
           lineHeight: "1.75rem",
         }}
-      >
+        >
+        <HouseholdUserProvider>
         <CategoryProvider>
           <TaskProvider>
             <Route exact path="/">
@@ -28,21 +29,20 @@ export const ApplicationViews = () => {
             <Route exact path="/categories/new">
               <CategoryForm />
             </Route>
-            <Route exact path="/categories/:categoryId(\d+)/update">
+            {/* <Route exact path="/categories/:categoryId(\d+)/update">
               <CategoryForm />
-            </Route>
+            </Route> */}
             <Route exact path="/categories/:categoryId">
               <CategoryDetail />
             </Route>
             <Route exact path="/tasks">
               <TaskList />
             </Route>
-            <Route exact path="/tasks/new">
+            <Route exact path="/:categoryId(\d+)/tasks/new">
               <TaskForm />
             </Route>
           </TaskProvider>
         </CategoryProvider>
-        <HouseholdUserProvider>
           <Route exact path="/profile">
             <HouseholdUserProfile />
           </Route>

@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react"
 import { TaskContext } from "./TaskProvider"
-import { useHistory } from "react-router-dom/cjs/react-router-dom"
-
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom"
+import { CategoryContext } from "../category/CategoryProvider"
 
 export const TaskList = (props) => {
     const { tasks, getTasks, deleteTask, updateTask } = useContext(TaskContext)
     const history = useHistory()
+    const { getCategory } = useContext(CategoryContext)
+    const { categoryId } = useParams()
     
 
     return (
@@ -35,7 +37,9 @@ export const TaskList = (props) => {
             }
             <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
-                    history.push({ pathname: "/tasks/new" })
+                    history.push(
+                        `/${categoryId}/tasks/new`
+                    )
                 }}
             >add new task</button>
 
@@ -50,7 +54,7 @@ export const TaskList = (props) => {
                         <button className="task__title">{task.title}</button> 
                         <button className="task__delete"
                         onClick={() => {
-                            deleteTask(task.id)
+                            deleteTask(task.id).then(()=> {getCategory(task.category)})
                         }}
                         >delete</button> 
                         {/* <button className="category__description">{category.description} </div> */}

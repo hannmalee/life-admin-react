@@ -14,7 +14,7 @@ export const CategoryList = (props) => {
         
         <article className="categories">
             {
-                categories.map(category => {
+                categories?.map(category => {
                     return <>
                     <button key={`category--${category.id}`} className="category"
                     onClick={() => {
@@ -41,6 +41,10 @@ export const CategoryList = (props) => {
                     history.push({ pathname: "/search" })
                 }}
             >add someone to household</button>
+
+            {/* <div>
+                <h2>Current Household Members:</h2>
+            </div> */}
         </article>
     )
 }
