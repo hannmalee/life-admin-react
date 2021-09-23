@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { HouseholdUserContext } from "./HouseholdUserProvider";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useRef } from "react";
@@ -9,15 +9,25 @@ export const UserSearch = () => {
     householdUser,
     getHouseholdUsers,
     householdUsers,
+    updateHouseholdUser
   } = useContext(HouseholdUserContext);
 
-  const email = React.createRef();
+  const [foundUserObj, setFoundUserObj] = useState()
 
+  const myHousehold = 
 
 
   useEffect(() => {
     getHouseholdUsers()
   }, []);
+
+
+const [currentUserSearch, setCurrentUserSearch] = useState("")
+
+
+  const changeUserSearchState = (event) => {
+    setCurrentUserSearch(event.target.value)
+}
 
   return (
     <article className="profile">
@@ -27,32 +37,22 @@ export const UserSearch = () => {
       <section className="profile__info">
         <header className="profile__header">
           <fieldset>
-            <label htmlFor="inputEmail"> Email address </label>
-            <input
-              ref={email}
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-              autoFocus
-            />
+            <input type="text" name="userSearch" required autoFocus className="form-control"
+                        value={currentUserSearch}
+                        onChange={changeUserSearchState}
+                    />
           </fieldset>
           <button
             onClick={evt => {
-                // Prevent form from being submitted
+                evt.preventDefault()
+                
 
-                // Send POST request to your API
-                if (evt === householdUsers.user?.email) {
+            const foundUser = householdUsers.find(user => user.user.email.includes(currentUserSearch))
 
-                    return <>
-                    <div> found </div>
-                    </>
-                } else {
-                    return <>
-                    <div> not found </div>
-                    </>
-                }
+            console.log(foundUser)
+                if (foundUser) {
+                    setFoundUserObj(foundUser)
+                } 
                 
             }}
             className="btn btn-primary"
@@ -63,8 +63,36 @@ export const UserSearch = () => {
 
         <div className="profile__title">
           <h2> Search Results: </h2>
+    
+          <div>{foundUserObj?.user?.first_name} {foundUserObj?.user?.last_name} <button className="user__add"
+                        onClick={() => {
+                            householdUser.household = myHousehold
+                            updateHouseholdUser(householdUser)
+                        }}
+                        >add to Household</button>  </div>
         </div>
       </section>
     </article>
   );
 };
+
+
+
+{/* <input type="text" name="description" required autoFocus className="form-control"
+                        value={currentCategory.description}
+                        onChange={changeCategoryDescriptionState}
+                    />
+
+const searchEntry = document.querySelector("input[id='userSearch']").value.toLowerCase()
+const users = getUsers()
+const foundUser = users.find(user => user.name.toLowerCase().includes(searchEntry))
+if (searchEntry === "") {
+    window.alert("Please enter a name to search")
+} else if (foundUser) {
+    resetFeed()
+    setDisplayUserProfile(foundUser.id)
+    applicationElement.dispatchEvent(new CustomEvent("stateChanged"))
+} else {
+    window.alert("User not found")
+}
+} */}

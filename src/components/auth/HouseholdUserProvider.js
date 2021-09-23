@@ -14,7 +14,7 @@ export const HouseholdUserProvider = (props) => {
     const getHouseholdUserProfile = () => {
         return fetch("http://localhost:8000/household_users", {
             headers: {
-                "Authorization": `Token ${localStorage.getItem("life_admin_token")}`
+                "Authorization": `Token ${localStorage.getItem("life-admin-token")}`
             }
         })
             .then(response => response.json())
@@ -24,15 +24,27 @@ export const HouseholdUserProvider = (props) => {
     const getHouseholdUsers = () => {
         return fetch("http://localhost:8000/household_users", {
             headers: {
-                "Authorization": `Token ${localStorage.getItem("life_admin_token")}`
+                "Authorization": `Token ${localStorage.getItem("life-admin-token")}`
             }
         })
             .then(response => response.json())
             .then(setHouseholdUsers)
     }
 
+    const updateHouseholdUser = (householdUser) => {
+        return fetch(`http://127.0.0.1:8000/household_user/${householdUser.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Token ${localStorage.getItem('life-admin-token')}`,
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(householdUser)
+        })
+            .then(getHouseholdUsers)
+    }
+
     return (
-        <HouseholdUserContext.Provider value={{ householdUser, getHouseholdUserProfile, householdUsers, getHouseholdUsers }}>
+        <HouseholdUserContext.Provider value={{ householdUser, getHouseholdUserProfile, householdUsers, getHouseholdUsers, updateHouseholdUser }}>
             {props.children}
         </HouseholdUserContext.Provider>
     )
