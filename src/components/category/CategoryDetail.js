@@ -24,7 +24,7 @@ export const CategoryDetail = () => {
             <h2>{category.title}</h2>
             <div>Description: {category.description}</div>
             <div>
-                <TaskList />
+                <TaskList tasks={category.task_set}/>
             </div>
         </div>
       </>

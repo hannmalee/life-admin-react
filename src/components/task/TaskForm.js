@@ -166,6 +166,7 @@ export const TaskForm = () => {
                 <label htmlFor="assigned_to">
                   Assigned to *drop down menu*:{" "}
                 </label>
+                <div></div>
                 <input
                   type="text"
                   name="assigned_to"

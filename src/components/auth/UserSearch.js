@@ -66,8 +66,10 @@ const [currentUserSearch, setCurrentUserSearch] = useState("")
     
           <div>{foundUserObj?.user?.first_name} {foundUserObj?.user?.last_name} <button className="user__add"
                         onClick={() => {
-                            householdUser.household = myHousehold
-                            updateHouseholdUser(householdUser)
+                            
+                            updateHouseholdUser({
+                                id: foundUserObj.id
+                            })
                         }}
                         >add to Household</button>  </div>
         </div>
