@@ -4,21 +4,21 @@
 
 body, button, input, select, textarea {
     color: #404040;
-    font-family: "Comfortaa", Arial, sans-serif;
-    font-size: 1rem;
+	font-family: 'Bitter', serif;  
+	font-size: 1rem;
     line-height: 1.5;
     padding: 0;
     margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Patua One", serif;
-    letter-spacing: 2px;
+	font-family: 'Bitter', serif;    
+	letter-spacing: 2px;
+	align-items: center;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: 'Bitter', serif;
 }
 
 .fakeLink {
@@ -41,7 +41,7 @@ code {
 /* General button style */
 .btn {
 	border: none;
-	font-family: Menlo;
+	font-family: 'Bitter', serif;	
 	font-size: inherit;
 	color: inherit;
 	background: none;
@@ -116,16 +116,16 @@ code {
 
 /* Button 2 */
 .btn-2 {
-	background: #2ecc71;
+	background: gray;
 	color: #fff;
 }
 
 .btn-2:hover {
-	background: #27ae60;
+	background: gray;
 }
 
 .btn-2:active {
-	background: #27ae60;
+	background: gray;
 	top: 2px;
 }
 

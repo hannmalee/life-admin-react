@@ -9,22 +9,19 @@ export const NavBar = (props) => {
 
     return (
         <>
-        <div className="householdName"> Household Name </div>
+        <h1 className="householdName"> LIFE ADMIN</h1>
         <ul className="navbar">
             <button 
             onClick={() => {
             history.push({ pathname: "/" })
             }}
             className="navbar__item">
-                Life Admin
+                home
             </button>
-            <li className="navbar__item">
-                Search
-            </li>
             {
                 (localStorage.getItem("life-admin-token") !== null) ?
                     <li className="nav-item">
-                        <button className="nav-link fakeLink"
+                        <button class="button" className="nav-link fakeLink"
                             onClick={() => {
                                 localStorage.removeItem("life-admin-token")
                                 history.push({ pathname: "/" })

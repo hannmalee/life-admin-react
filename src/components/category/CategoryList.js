@@ -23,7 +23,7 @@ export const CategoryList = (props) => {
                         <div className="category__title">{category.title}</div>
                         {/* <div className="category__description">{category.description} </div> */}
                     </button>
-                    <button className="category__delete"
+                    <button class="button" className="category__delete"
                         onClick={() => {
                             deleteCategory(category.id)
                         }}
@@ -31,12 +31,12 @@ export const CategoryList = (props) => {
                     </>
                 })
             }
-        <button className="btn btn-2 btn-sep icon-create"
+        <button class="button" className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
                     history.push({ pathname: "/categories/new" })
                 }}
             >add new category</button>
-        <button className="btn btn-2 btn-sep icon-create"
+        <button class="button" className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
                     history.push({ pathname: "/search" })
                 }}

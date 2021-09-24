@@ -14,6 +14,8 @@ export const UserSearch = () => {
 
   const [foundUserObj, setFoundUserObj] = useState()
 
+  const history = useHistory()
+
 
   useEffect(() => {
     getHouseholdUsers()
@@ -27,9 +29,14 @@ const [currentUserSearch, setCurrentUserSearch] = useState("")
     setCurrentUserSearch(event.target.value)
 }
 
+
   return (
     <article className="profile">
       <header>
+
+      <div className="profile__title"> 
+        </div>
+
         <h1>Search by email:</h1>
       </header>
       <section className="profile__info">
@@ -62,12 +69,12 @@ const [currentUserSearch, setCurrentUserSearch] = useState("")
         <div className="profile__title">
           <h2> Search Results: </h2>
     
-          <div>{foundUserObj?.user?.first_name} {foundUserObj?.user?.last_name} <button className="user__add"
+          <div>{foundUserObj?.user?.first_name} {foundUserObj?.user?.last_name} <button class="button" className="user__add"
                         onClick={() => {
                             
                             updateHouseholdUser({
                                 id: foundUserObj.id
-                            })
+                            }).then(() => history.push("/"))
                         }}
                         >add to Household</button>  </div>
         </div>

@@ -40,7 +40,7 @@ export const HouseholdUserProfile = () => {
                     People in your household:
                     {/* {householdUser.user.first_name}  */}
                 </div>
-                <button className="btn btn-2 btn-sep icon-create"
+                <button class="button" className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
                     history.push({ pathname: "/search" })
                 }}

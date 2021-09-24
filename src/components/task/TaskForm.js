@@ -183,19 +183,19 @@ export const TaskForm = (props) => {
                     if (user.houshold === householdUser.household) {
                     return <>
                     <section key={`task--${task.id}`} className="task">
-                        <button className="task__title">{task.title}</button> 
-                        <button className="task__delete"
+                        <button class="button" className="task__title">{task.title}</button> 
+                        <button class="button" className="task__delete"
                         onClick={() => {
                             deleteTask(task.id)
                         }}
                         >delete</button> 
-                        <button className="task__complete"
+                        <button class="button" className="task__complete"
                         onClick={() => {
                             task.is_completed = true
                             updateTask(task)
                         }}
                         >task completed</button> 
-                        {/* <button className="category__description">{category.description} </div> */}
+                        {/* <button class="button" className="category__description">{category.description} </div> */}
                     {/* </section> */}
                     
                 {/* }}) */}
