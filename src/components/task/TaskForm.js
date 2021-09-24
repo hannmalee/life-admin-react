@@ -2,13 +2,24 @@ import React, { useContext, useState, useEffect } from "react";
 import { TaskContext } from "./TaskProvider";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { HouseholdUserContext } from "../auth/HouseholdUserProvider";
 
-export const TaskForm = () => {
+export const TaskForm = (props) => {
   const history = useHistory();
   const { createTask, getTask, updateTask, getTasks } = useContext(TaskContext);
   const { taskId } = useParams();
   const [isEdit, setIsEdit] = useState(false);
   const { categoryId } = useParams()
+
+  const {
+    getHouseholdUsers, householdUsers, householdUser, updateHouseholdUser
+  } = useContext(HouseholdUserContext);
+
+  useEffect(
+    () => {
+        getHouseholdUsers()
+    }, []
+)
 
   /*
         Since the input fields are bound to the values of
@@ -21,7 +32,7 @@ export const TaskForm = () => {
     is_completed: false,
     created_on: "2021-10-2",
     due_date: "2021-10-2",
-    category: 0,
+    category_id: categoryId,
     assigned_to: 0,
     created_by: 0,
   });
@@ -47,7 +58,7 @@ export const TaskForm = () => {
             is_completed: false,
             created_on: data.created_on,
             due_date: data.due_date,
-            category: categoryId,
+            category_id: data.category_id,
             assigned_to: data.assigned_to,
             created_by: parseInt(localStorage.getItem("life-admin-token")),
           });
@@ -145,7 +156,7 @@ export const TaskForm = () => {
                 />
               </div>
             </fieldset> */}
-            <fieldset>
+            {/* <fieldset>
               <div className="form-group">
                 <label htmlFor="assigned_to">
                   Category: *drop down menu*:{" "}
@@ -160,25 +171,46 @@ export const TaskForm = () => {
                   onChange={changeTaskCategoryState}
                 />
               </div>
-            </fieldset>
-            <fieldset>
+            </fieldset> */}
+            {/* <fieldset>
               <div className="form-group">
                 <label htmlFor="assigned_to">
                   Assigned to *drop down menu*:{" "}
                 </label>
-                <input
+                <div>{
+                householdUsers?.map(user => {
+
+                    if (user.houshold === householdUser.household) {
+                    return <>
+                    <section key={`task--${task.id}`} className="task">
+                        <button className="task__title">{task.title}</button> 
+                        <button className="task__delete"
+                        onClick={() => {
+                            deleteTask(task.id)
+                        }}
+                        >delete</button> 
+                        <button className="task__complete"
+                        onClick={() => {
+                            task.is_completed = true
+                            updateTask(task)
+                        }}
+                        >task completed</button> 
+                        {/* <button className="category__description">{category.description} </div> */}
+                    {/* </section> */}
+                    
+                {/* }}) */}
+            {/* }</div> */}
+                {/* <input
                   type="text"
                   name="assigned_to"
                   required
                   autoFocus
                   className="form-control"
                   value={currentTask.assigned_to}
-                  onChange={changeTaskAssignedToState}
-                />
+                  onChange={changeTaskAssignedToState} */}
+                {/* />
               </div>
-            </fieldset>
-
-            {/* You create the rest of the input fields for each game property */}
+            </fieldset> */}
 
             <button
               type="submit"
@@ -192,11 +224,8 @@ export const TaskForm = () => {
                   is_completed: currentTask.is_completed,
                   created_on: currentTask.created_on,
                   due_date: currentTask.due_date,
-                  category: currentTask.category,
-                  assigned_to: currentTask.assigned_to,
-                  created_by: parseInt(
-                    localStorage.getItem("life-admin-token")
-                  ),
+                  category_id: currentTask.category_id,
+                  
                 };
 
                 // Send POST request to your API
@@ -204,7 +233,9 @@ export const TaskForm = () => {
                   task.id = taskId;
                   updateTask(task).then(() => history.push("/"));
                 } else {
-                  createTask(task).then(() => history.push("/"));
+                  createTask(task)
+                  .then(() => history.push(`/categories/${categoryId}`))
+                  ;
                 }
               }}
               className="btn btn-primary"

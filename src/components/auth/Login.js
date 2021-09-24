@@ -1,12 +1,15 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
+ 
 
 
-export const Login = props => {
+export const Login = () => {
     const email = React.createRef()
     const password = React.createRef()
     const invalidDialog = React.createRef()
+    const username = React.createRef()
+    const history = useHistory()
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -18,7 +21,7 @@ export const Login = props => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                username: email.current.value,
+                username: username.current.value,
                 password: password.current.value
             })
         })
@@ -26,7 +29,7 @@ export const Login = props => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem( "life-admin-token", res.token )
-                    props.history.push("/")
+                    history.push("/")
                 }
                 else {
                     invalidDialog.current.showModal()
@@ -45,8 +48,8 @@ export const Login = props => {
                     <h1>Life Admin</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email" id="email" className="form-control"  placeholder="Email address" required autoFocus />
+                        <label htmlFor="inputUsername"> Username </label>
+                        <input ref={username} type="text" id="username" className="form-control"  placeholder="Username" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>

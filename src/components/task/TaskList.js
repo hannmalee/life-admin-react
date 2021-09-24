@@ -1,42 +1,19 @@
 import React, { useContext, useEffect } from "react"
 import { TaskContext } from "./TaskProvider"
-import { useHistory } from "react-router-dom/cjs/react-router-dom"
-
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom"
+import { CategoryContext } from "../category/CategoryProvider"
 
 export const TaskList = (props) => {
     const { tasks, getTasks, deleteTask, updateTask } = useContext(TaskContext)
     const history = useHistory()
+    const { getCategory } = useContext(CategoryContext)
+    const { categoryId } = useParams()
     
-    useEffect(() => {
-        getTasks()
-    }, [])
-
-    // useEffect(() => {
-    //     console.log("taskId", typeof taskId);
-    //     if (taskId) {
-    //       setIsEdit(true);
-    //       getTask(taskId).then(
-    //         (data) => {
-    //           console.log(data);
-    //           setCurrentTask({
-    //             title: data.title,
-    //             description: data.description,
-    //             is_completed: data.is_completed,
-    //             created_on: data.created_on,
-    //             due_date: data.due_date,
-    //             category: categoryId,
-    //             assigned_to: data.assigned_to,
-    //             created_by: parseInt(localStorage.getItem("life-admin-token")),
-    //           });
-    //         },
-    //         [taskId]
-    //       );
-    //     }})
 
     return (
         <article className="tasks">
             {
-                tasks.map(task => {
+                props.tasks?.map(task => {
 
                     if (!task.is_completed) {
                     return <>
@@ -60,14 +37,16 @@ export const TaskList = (props) => {
             }
             <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
-                    history.push({ pathname: "/tasks/new" })
+                    history.push(
+                        `/${categoryId}/tasks/new`
+                    )
                 }}
             >add new task</button>
 
 
         <h2>Completed Tasks:</h2>
         {
-                tasks.map(task => {
+                props.tasks?.map(task => {
 
                     if (task.is_completed) {
                     return <>
@@ -75,7 +54,7 @@ export const TaskList = (props) => {
                         <button className="task__title">{task.title}</button> 
                         <button className="task__delete"
                         onClick={() => {
-                            deleteTask(task.id)
+                            deleteTask(task.id).then(()=> {getCategory(task.category)})
                         }}
                         >delete</button> 
                         {/* <button className="category__description">{category.description} </div> */}
